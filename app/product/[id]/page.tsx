@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "@/app/components/Button";
 import EyesDesign from "@/app/components/EyesDesign";
 import HeartIcon from "@/app/components/HeartIcon";
@@ -5,37 +7,75 @@ import ToggleText from "@/app/components/ToggleText";
 import UniqueElement from "@/app/components/UniqueElement";
 import { products, basic } from "@/app/data/ProductsDataSk";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
-async function getData(id: string) {
-  const data = products.find((item) => item.id.toString() === id);
-  return data;
+interface ProductData {
+  id: number;
+  title: string;
+  title_image: string;
+  title_description: string;
+  second_title: string;
+  second_title_description: string;
+  toggles: {
+    id: number;
+    title: string;
+    img_src: string;
+    description: string;
+  }[];
+  design_title: string;
+  images: string[];
+  collection?: string[];
+  six_group?: string[];
+  last_four?: string[];
 }
 
-const page = async ({ params }: { params: { id: string } }) => {
-  const product = await getData(params.id);
+const page = ({ params }: { params: { id: string } }) => {
+  const [product, setProduct] = useState<ProductData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [customClassName, setCustomClassName] = useState("");
+  const [primaryColor, setPrimaryColor] = useState("");
 
-  if (!product) {
-    return "no data";
-  }
+  useEffect(() => {
+    if (params.id && Array.isArray(products)) {
+      const productById = products.find(
+        (item) => item.id.toString() === params.id
+      );
+      setProduct(productById || null);
+    }
+  }, [params.id]);
+
+  useEffect(() => {
+    if (params.id === "1") {
+      setCustomClassName("product_silver");
+      setPrimaryColor("");
+    } else if (params.id === "2") {
+      setCustomClassName("product_white");
+      setPrimaryColor("");
+    } else {
+      setCustomClassName("product_black");
+      setPrimaryColor("text_ccc");
+    }
+  }, [params.id]);
+  if (!product) return <p>No profile data</p>;
+
   const firstFourItems = product.images.slice(0, 4);
   const lastSixItems = product.images.slice(4);
 
   return (
     <main>
-      <div className={`product_introduction `}>
-        {/* <div className={`product_introduction ${customClassName}`}> */}
+      <div className={`product_introduction ${customClassName}`}>
         <div className="fixed_height" />
         <div className="inside">
           <div className="change_row_column">
             <div>
-              <h1 className={`product_id font_13`}>
-                {/* <h1 className={`product_id ${primaryColor} font_13`}> */}0
-                {params.id}
+              <h1 className={`product_id ${primaryColor} font_13`}>
+                0{params.id}
               </h1>
             </div>
             <div>
-              {/* <h1 className={`${primaryColor} font_13`}>{product.title}</h1>
-              <p className={primaryColor}>{product.title_description}</p> */}
+              <h1 className={`${primaryColor} font_13`}>{product.title}</h1>
+              <p className={primaryColor}>{product.title_description}</p>
               <Link href="/contact">
                 <Button productId={params.id}> {basic[0].button_zaujem}</Button>
                 <div className="margin_bottom_5"></div>
@@ -51,10 +91,9 @@ const page = async ({ params }: { params: { id: string } }) => {
           //   onLoad={handleImageLoad}
         />
         <div className="inside">
-          {/* <h2 className={primaryColor}>{product.second_title}</h2> */}
+          <h2 className={primaryColor}>{product.second_title}</h2>
           <div className="product_description">
-            <p className={`w50 `}>
-              {/* <p className={`w50 ${primaryColor}`}> */}
+            <p className={`w50 ${primaryColor}`}>
               {product.second_title_description}
             </p>
 
@@ -88,7 +127,7 @@ const page = async ({ params }: { params: { id: string } }) => {
         </div>
 
         <div className="inside">
-          {/* <h2 className={`${primaryColor} max1200`}>{product.design_title}</h2> */}
+          <h2 className={`${primaryColor} max1200`}>{product.design_title}</h2>
           <div className="product_images">
             {firstFourItems.map((image_src, index) => (
               <div className="image-container" key={index}>
