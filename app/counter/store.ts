@@ -1,4 +1,6 @@
 
+'use client';
+
 import { create } from 'zustand';
 
 const initialFavoriteImages = JSON.parse(localStorage.getItem("favoriteImages") || "[]");
