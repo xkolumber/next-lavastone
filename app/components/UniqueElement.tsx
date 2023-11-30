@@ -24,9 +24,6 @@ const UniqueElement = ({ productId }: Props) => {
   const location = usePathname();
 
   const isHomepage = location === "/";
-  {
-    isHomepage && console.log("ano homepae");
-  }
   return (
     <>
       <div

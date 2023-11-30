@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import useCounterStore from "../counter/store";
 import toast, { Toaster } from "react-hot-toast";
@@ -16,7 +16,8 @@ const HeartIcon = ({ image_src, onUpdateFavorites }: Props) => {
   const [isFilled, setIsFilled] = useState(favoriteImages.includes(image_src));
   const [isClicked, setIsClicked] = useState(isFilled);
 
-  const { productId } = useParams();
+  const pathname = usePathname();
+  const productId = pathname.split("/").pop();
 
   useEffect(() => {
     if (productId === "1" || productId === "2" || productId === "3") {

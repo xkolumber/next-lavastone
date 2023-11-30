@@ -3,12 +3,17 @@
 import Button from "@/app/components/Button";
 import EyesDesign from "@/app/components/EyesDesign";
 import HeartIcon from "@/app/components/HeartIcon";
+import ProductSkeleton from "@/app/components/ProductSkeleton";
 import ToggleText from "@/app/components/ToggleText";
 import UniqueElement from "@/app/components/UniqueElement";
 import { products, basic } from "@/app/data/ProductsDataSk";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { ClipLoader } from "react-spinners";
 
 interface ProductData {
   id: number;
@@ -31,10 +36,17 @@ interface ProductData {
 }
 
 const page = ({ params }: { params: { id: string } }) => {
+  const pathname = usePathname();
+
   const [product, setProduct] = useState<ProductData | null>(null);
   const [loading, setLoading] = useState(true);
   const [customClassName, setCustomClassName] = useState("");
   const [primaryColor, setPrimaryColor] = useState("");
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
 
   useEffect(() => {
     if (params.id && Array.isArray(products)) {
@@ -42,22 +54,64 @@ const page = ({ params }: { params: { id: string } }) => {
         (item) => item.id.toString() === params.id
       );
       setProduct(productById || null);
+      setLoading(false);
     }
-  }, [params.id]);
+  }, [params.id, products]);
 
   useEffect(() => {
-    if (params.id === "1") {
-      setCustomClassName("product_silver");
-      setPrimaryColor("");
-    } else if (params.id === "2") {
-      setCustomClassName("product_white");
-      setPrimaryColor("");
-    } else {
-      setCustomClassName("product_black");
-      setPrimaryColor("text_ccc");
+    if (product) {
+      if (params.id === "1") {
+        setCustomClassName("product_silver");
+        setPrimaryColor("");
+      } else if (params.id === "2") {
+        setCustomClassName("product_white");
+        setPrimaryColor("");
+      } else {
+        setCustomClassName("product_black");
+        setPrimaryColor("text_ccc");
+      }
     }
-  }, [params.id]);
-  if (!product) return <p>No profile data</p>;
+  }, [params.id, product]);
+
+  if (loading) {
+    return (
+      <div className={`product_introduction ${customClassName}`}>
+        <div className="fixed_height" />
+        <div className="inside">
+          <div className="change_row_column">
+            <div>
+              <h1 className={`product_id ${primaryColor} font_13`}>
+                <Skeleton count={1} width={80} borderRadius={10} />
+              </h1>
+            </div>
+            <div>
+              <h1 className={`${primaryColor} font_13`}>
+                <Skeleton count={1} width={300} borderRadius={10} />
+              </h1>
+              <p className={primaryColor}>
+                <Skeleton count={4} width={300} borderRadius={10} />
+              </p>
+              <div className="margin_bottom_5"></div>
+              <Link href="/contact">
+                <div className="mt-8">
+                  <Skeleton
+                    count={1}
+                    width={120}
+                    height={30}
+                    borderRadius={10}
+                  />
+                </div>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!product) {
+    return <p>No data</p>;
+  }
 
   const firstFourItems = product.images.slice(0, 4);
   const lastSixItems = product.images.slice(4);
@@ -83,12 +137,12 @@ const page = ({ params }: { params: { id: string } }) => {
             </div>
           </div>
         </div>
-        {/* {!imageLoaded && <ProductSkeleton />} */}
+        {!imageLoaded && <ProductSkeleton />}
         <img
           src={product.title_image}
           alt={product.title}
           className="product_image_main"
-          //   onLoad={handleImageLoad}
+          onLoad={handleImageLoad}
         />
         <div className="inside">
           <h2 className={primaryColor}>{product.second_title}</h2>
