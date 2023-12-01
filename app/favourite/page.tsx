@@ -13,8 +13,12 @@ import Image from "next/image";
 import useCounterStore from "../counter/store";
 
 const Page = () => {
-  const { favoriteImages } = useCounterStore();
-  const [favoriteImagess, setFavoriteImagess] = useState(favoriteImages);
+  const [favoriteImages, setFavoriteImages] = useState([]);
+  useEffect(() => {
+    setFavoriteImages(
+      JSON.parse(localStorage.getItem("favoriteImages") || "[]")
+    );
+  }, []);
 
   const initialFavoriteImages = favoriteImages;
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -23,10 +27,10 @@ const Page = () => {
     setImageLoaded(true);
   };
   const updateFavoriteImages = () => {
-    setFavoriteImagess(
+    setFavoriteImages(
       JSON.parse(localStorage.getItem("favoriteImages") || "[]")
     );
-    console.log("Favorite images:", favoriteImagess);
+    console.log("Favorite images:", favoriteImages);
   };
 
   const skeletons = [1, 2, 3, 4];
@@ -113,7 +117,7 @@ const Page = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: data.email, images: favoriteImagess }),
+        body: JSON.stringify({ email: data.email, images: favoriteImages }),
       });
 
       if (response.ok) {
