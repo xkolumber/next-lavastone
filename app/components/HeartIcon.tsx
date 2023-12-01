@@ -17,15 +17,14 @@ const HeartIcon = ({ image_src, onUpdateFavorites }: Props) => {
   const [isFilled, setIsFilled] = useState(favoriteImages.includes(image_src));
   const [isClicked, setIsClicked] = useState(isFilled);
 
-  const pathname = usePathname();
-  const productId = pathname.split("/").pop();
+  const { productId } = useParams();
 
   useEffect(() => {
     if (productId === "1" || productId === "2" || productId === "3") {
       setIsFilled(favoriteImages.includes(image_src));
       setIsClicked(favoriteImages.includes(image_src));
     }
-  }, [favoriteImages, productId, image_src]);
+  }, [favoriteImages, image_src]);
 
   const notify = () =>
     toast.success("Pridané do obľúbených", {
@@ -66,9 +65,9 @@ const HeartIcon = ({ image_src, onUpdateFavorites }: Props) => {
       <Toaster />
       <div className="heart_icon_img" onClick={toggleHeart}>
         {isFilled ? (
-          <Image src="/heart_filled.svg" alt="Heart" width={30} height={30} />
+          <img src="/heart_filled.svg" />
         ) : (
-          <Image src="/heart_outline.svg" alt="Heart" width={30} height={30} />
+          <img src="/heart_outline.svg" />
         )}
       </div>
     </>

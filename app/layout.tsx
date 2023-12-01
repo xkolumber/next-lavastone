@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import "./globals.css";
 import "./normalize.css";
+import HydrationZustand from "./components/HydrationZustand";
 
 const inter = Inter({
   weight: ["100", "200", "300", "400", "600", "700"],
@@ -24,9 +25,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        {children}
-        <Footer />
+        <HydrationZustand>
+          <Navbar />
+          {children}
+          <Footer />
+        </HydrationZustand>
       </body>
     </html>
   );

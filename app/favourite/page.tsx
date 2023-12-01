@@ -10,17 +10,14 @@ import { ClipLoader } from "react-spinners";
 import { basic } from "../data/ProductsDataSk";
 import Link from "next/link";
 import Image from "next/image";
-import useCounterStore from "../counter/store";
 
 const Page = () => {
-  const [favoriteImages, setFavoriteImages] = useState([]);
-  useEffect(() => {
-    setFavoriteImages(
-      JSON.parse(localStorage.getItem("favoriteImages") || "[]")
-    );
-  }, []);
-
-  const initialFavoriteImages = favoriteImages;
+  const [favoriteImages, setFavoriteImages] = useState(
+    JSON.parse(localStorage.getItem("favoriteImages") || "[]")
+  );
+  const initialFavoriteImages = JSON.parse(
+    localStorage.getItem("favoriteImages") || "[]"
+  );
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const handleImageLoad = () => {
@@ -72,6 +69,27 @@ const Page = () => {
     };
   }, [popUpEmail]);
 
+  /*Popup final*/
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        popupRef2.current &&
+        !popupRef2.current.contains(event.target as Node)
+      ) {
+        setPopUpFinal(false);
+      }
+    };
+
+    if (popUpFinal) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [popUpFinal]);
   /*Popup final*/
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -152,7 +170,6 @@ const Page = () => {
               {basic[0].button_poslat_email}
             </button>
           </div>
-
           <div className="product_images">
             {!imageLoaded &&
               initialFavoriteImages.length > 0 &&
@@ -192,7 +209,7 @@ const Page = () => {
                   <p className="error_message">{errors.email.message}</p>
                 )}
                 <button
-                  className="btn btn--popup"
+                  className="btn btn--secondary"
                   type="submit"
                   disabled={isLoading}
                 >
