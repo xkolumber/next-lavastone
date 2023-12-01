@@ -14,12 +14,6 @@ import { useParams, usePathname } from "next/navigation";
 import { Elsie_Swash_Caps } from "next/font/google";
 
 const Navbar = () => {
-  const router = usePathname();
-  const isHomePage = router === "/";
-
-  if (isHomePage) {
-    return null; // Don't render Navbar on the homepage
-  }
   const [isExpanded, setIsExpanded] = useState(false);
   const [customClassName, setCustomClassName] = useState("product_silver");
   const [whiteColor, setWhiteColor] = useState("");
@@ -29,18 +23,14 @@ const Navbar = () => {
 
   const pathname = usePathname();
   useEffect(() => {
-    let productId: any;
+    let productId: any = "";
 
     if (pathname.includes("product")) {
       productId = pathname.split("/").pop();
-      if (productId) {
-        setProductId(productId);
-      }
     } else {
-      setProductId("");
+      productId = "";
     }
-
-    console.log(pathname, productId);
+    setProductId(productId);
   }, [pathname]);
 
   const toggleNavbar = () => {
@@ -52,32 +42,45 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    let custom_class_name = "";
+    let white_color = "";
+    let custom_border = "";
     if (productId) {
       if (productId === "1") {
-        setCustomClassName("product_silver");
-        setWhiteColor("");
-        setCustomBorder("");
+        custom_class_name = "product_silver";
+        white_color = "";
+        custom_border = "";
       } else if (productId === "2") {
-        setCustomBorder("");
-        setWhiteColor("product_white");
-        setCustomClassName("product_white");
+        custom_class_name = "product_white";
+        white_color = "product_white";
+        custom_border = "";
       } else {
-        setCustomBorder("custom_border_primary");
-        setWhiteColor("");
-        setCustomClassName("product_black");
+        custom_class_name = "product_black";
+        white_color = "";
+        custom_border = "custom_border_primary";
       }
     } else {
       if (pathname.includes("/favourite")) {
-        setCustomBorder("");
-        setWhiteColor("product_white");
-        setCustomClassName("product_white");
+        custom_class_name = "product_white";
+        white_color = "product_white";
+        custom_border = "";
       } else {
-        setCustomBorder("");
-        setWhiteColor("product_silver");
-        setCustomClassName("product_silver");
+        custom_class_name = "product_silver";
+        white_color = "product_silver";
+        custom_border = "";
       }
     }
+    setCustomClassName(custom_class_name);
+    setWhiteColor(white_color);
+    setCustomBorder(custom_border);
   }, [productId, pathname]);
+
+  const router = usePathname();
+  const isHomePage = router === "/";
+
+  if (isHomePage) {
+    return null; // Don't render Navbar on the homepage
+  }
 
   return (
     <div className={`navbar ${customClassName} ${customBorder} `}>

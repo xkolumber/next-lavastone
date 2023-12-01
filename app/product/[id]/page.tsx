@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import Image from "next/image";
 
 interface ProductData {
   id: number;
@@ -51,7 +52,7 @@ const Page = ({ params }: { params: { id: string } }) => {
       setProduct(productById || null);
       setLoading(false);
     }
-  }, [params.id, products]);
+  }, [params.id]);
 
   useEffect(() => {
     if (product) {
@@ -66,7 +67,7 @@ const Page = ({ params }: { params: { id: string } }) => {
         setPrimaryColor("text_ccc");
       }
     }
-  }, [params.id, product]);
+  }, [product, params.id]);
 
   if (loading) {
     return (
@@ -133,12 +134,16 @@ const Page = ({ params }: { params: { id: string } }) => {
           </div>
         </div>
         {!imageLoaded && <ProductSkeleton />}
-        <img
+        <Image
           src={product.title_image}
           alt={product.title}
           className="product_image_main"
           onLoad={handleImageLoad}
+          width={1000}
+          height={1000}
+          priority={true}
         />
+
         <div className="inside">
           <h2 className={primaryColor}>{product.second_title}</h2>
           <div className="product_description">
@@ -180,11 +185,15 @@ const Page = ({ params }: { params: { id: string } }) => {
           <div className="product_images">
             {firstFourItems.map((image_src, index) => (
               <div className="image-container" key={index}>
-                <img
+                <Image
                   src={image_src}
                   alt="Product PietraColata"
                   className="image"
+                  width={1000}
+                  height={1000}
+                  priority={true}
                 />
+
                 <HeartIcon image_src={image_src} />
               </div>
             ))}
@@ -196,10 +205,13 @@ const Page = ({ params }: { params: { id: string } }) => {
           <div className="product_images">
             {lastSixItems.map((image_src, index) => (
               <div className="image-container" key={index}>
-                <img
+                <Image
                   src={image_src}
                   alt={`Product ${product.title} `}
                   className="image"
+                  width={1000}
+                  height={1000}
+                  priority={true}
                 />
                 <HeartIcon image_src={image_src} />
               </div>
@@ -209,31 +221,41 @@ const Page = ({ params }: { params: { id: string } }) => {
           {product.collection && (
             <div className="collection_">
               {product.collection.map((image_src, index) => (
-                <img
+                <Image
                   key={`product-image-${index}`}
                   src={image_src}
                   alt={`Product ${product.title} `}
                   className="image"
+                  width={1000}
+                  height={1000}
+                  priority={true}
                 />
               ))}
             </div>
           )}
           {product.six_group?.map((image_src, index) => (
-            <img
+            <Image
               key={`product-image-${index}`}
               src={image_src}
               alt={`6 products `}
               className="six_images"
+              width={100}
+              height={100}
+              priority={true}
             />
           ))}
           <div className="product_images">
             {product.last_four?.map((image_src, index) => (
               <div className="image-container" key={index}>
-                <img
+                <Image
                   src={image_src}
                   alt={`Product ${product.title} `}
                   className="image"
+                  width={500}
+                  height={500}
+                  priority={true}
                 />
+
                 <HeartIcon image_src={image_src} />
               </div>
             ))}

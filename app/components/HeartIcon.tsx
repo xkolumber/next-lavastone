@@ -4,6 +4,7 @@ import { useParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import useCounterStore from "../counter/store";
 import toast, { Toaster } from "react-hot-toast";
+import Image from "next/image";
 
 interface Props {
   image_src: string;
@@ -24,7 +25,7 @@ const HeartIcon = ({ image_src, onUpdateFavorites }: Props) => {
       setIsFilled(favoriteImages.includes(image_src));
       setIsClicked(favoriteImages.includes(image_src));
     }
-  }, [favoriteImages, image_src]);
+  }, [favoriteImages, productId, image_src]);
 
   const notify = () =>
     toast.success("Pridané do obľúbených", {
@@ -65,9 +66,9 @@ const HeartIcon = ({ image_src, onUpdateFavorites }: Props) => {
       <Toaster />
       <div className="heart_icon_img" onClick={toggleHeart}>
         {isFilled ? (
-          <img src="/heart_filled.svg" />
+          <Image src="/heart_filled.svg" alt="Heart" width={30} height={30} />
         ) : (
-          <img src="/heart_outline.svg" />
+          <Image src="/heart_outline.svg" alt="Heart" width={30} height={30} />
         )}
       </div>
     </>

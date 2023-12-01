@@ -7,7 +7,8 @@ const page = () => {
   return (
     <main>
       <IntroductionNext />
-      <CardCollection />
+
+      {/* <CardCollection /> */}
       <div className="product_silver">
         <UniqueElement />
       </div>

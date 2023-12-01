@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Button from "./Button";
 import Link from "next/link";
 import { basic } from "../data/ProductsDataSk";
+import Image from "next/image";
 interface Props {
   productId?: string;
 }
@@ -24,11 +25,14 @@ const EyesDesign = ({ productId }: Props) => {
 
   return (
     <div className={`template2 center ${customBordertop} mobile_padding `}>
-      <img
+      <Image
         src="https://storage.googleapis.com/lavastone/uvod/magnum_right.png"
         alt="Magma"
         className="magnum_product_page"
+        width={1000}
+        height={1000}
       />
+
       <div className="inside ">
         <h2 className={`mb2 max1200 ${primaryColor}`}>{basic[0].eye_design}</h2>
         <p className={primaryColor}>{basic[0].eye_design_description}</p>

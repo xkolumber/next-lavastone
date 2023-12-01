@@ -67,10 +67,13 @@ const Page = () => {
         <div className="product_images">
           {about_us[0].images.map((image_src, index) => (
             <div className="image-container" key={index}>
-              <img
+              <Image
                 src={image_src}
                 alt="Product PietraColata"
                 className="image"
+                width={500}
+                height={500}
+                quality={100}
               />
             </div>
           ))}

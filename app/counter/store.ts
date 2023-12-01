@@ -1,11 +1,5 @@
-
-'use client';
-
 import { create } from 'zustand';
 
-
-
-const initialFavoriteImages = JSON.parse(localStorage.getItem("favoriteImages") || "[]");
 
 interface CounterStore {
   counter: number;
@@ -15,8 +9,14 @@ interface CounterStore {
 }
 
 const useCounterStore = create<CounterStore>((set) => ({
-  counter: initialFavoriteImages.length,
-  favoriteImages: initialFavoriteImages || [],
+
+  counter: 0,
+  favoriteImages: [],
+
+  loadFavoriteImages: () => {
+    const storedImages = JSON.parse(localStorage.getItem('favoriteImages') || '[]');
+    set({ favoriteImages: storedImages });
+  },
 
   incrementWithFavorite: (src) =>
     set((state) => {

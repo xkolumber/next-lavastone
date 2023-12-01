@@ -9,24 +9,24 @@ import HeartIcon from "../components/HeartIcon";
 import { ClipLoader } from "react-spinners";
 import { basic } from "../data/ProductsDataSk";
 import Link from "next/link";
+import Image from "next/image";
+import useCounterStore from "../counter/store";
 
 const Page = () => {
-  const [favoriteImages, setFavoriteImages] = useState(
-    JSON.parse(localStorage.getItem("favoriteImages") || "[]")
-  );
-  const initialFavoriteImages = JSON.parse(
-    localStorage.getItem("favoriteImages") || "[]"
-  );
+  const { favoriteImages } = useCounterStore();
+  const [favoriteImagess, setFavoriteImagess] = useState(favoriteImages);
+
+  const initialFavoriteImages = favoriteImages;
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
   const updateFavoriteImages = () => {
-    setFavoriteImages(
+    setFavoriteImagess(
       JSON.parse(localStorage.getItem("favoriteImages") || "[]")
     );
-    console.log("Favorite images:", favoriteImages);
+    console.log("Favorite images:", favoriteImagess);
   };
 
   const skeletons = [1, 2, 3, 4];
@@ -113,7 +113,7 @@ const Page = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: data.email, images: favoriteImages }),
+        body: JSON.stringify({ email: data.email, images: favoriteImagess }),
       });
 
       if (response.ok) {
@@ -155,11 +155,15 @@ const Page = () => {
               skeletons.map((skeleton) => <FavouriteSkeleton key={skeleton} />)}
             {initialFavoriteImages.map((fav_image: string) => (
               <div key={fav_image} className="image-container">
-                <img
+                <Image
                   src={fav_image}
                   alt="Favourite images"
                   onLoad={handleImageLoad}
+                  width={1000}
+                  height={1000}
+                  priority={true}
                 />
+
                 <HeartIcon
                   image_src={fav_image}
                   onUpdateFavorites={updateFavoriteImages}

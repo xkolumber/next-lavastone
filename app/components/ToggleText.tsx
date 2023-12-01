@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import ToggleArrow from "./ToggleArrow";
+import Image from "next/image";
 
 interface Props {
   title: string;
@@ -36,15 +37,19 @@ function ToggleText({ title, text, productId, isService, img_src }: Props) {
           <div className="toggle_images_title">
             {!isService && (
               <div className="toggle_images">
-                <img
+                <Image
                   src="/magma_layer.svg"
                   alt="Magma layer"
                   className="togggle_layer"
+                  width={35}
+                  height={35}
                 />
-                <img
-                  src={img_src}
+                <Image
+                  src={img_src!}
                   alt="Icon element "
                   className="toggle_icon_element"
+                  width={20}
+                  height={20}
                 />
               </div>
             )}

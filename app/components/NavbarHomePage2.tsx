@@ -25,15 +25,19 @@ const NavbarHomePage2 = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > window.innerHeight * 0.5) {
-        setIsNavbarVisible(true);
-      } else {
-        setIsNavbarVisible(false);
+      if (typeof window !== "undefined") {
+        if (window.scrollY > window.innerHeight * 0.5) {
+          setIsNavbarVisible(true);
+        } else {
+          setIsNavbarVisible(false);
+        }
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
   }, []);
 
   return (

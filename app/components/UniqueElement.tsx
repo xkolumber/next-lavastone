@@ -5,6 +5,7 @@ import { basic } from "../data/ProductsDataSk";
 import Button from "./Button";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface Props {
   productId?: string;
@@ -35,11 +36,14 @@ const UniqueElement = ({ productId }: Props) => {
             : "custom_border_primary_top_tertiary"
         }`}
       >
-        <img
+        <Image
           src="https://storage.googleapis.com/lavastone/uvod/magnum_down.png"
           alt="Magma"
           className="magnum_down"
+          width={1000}
+          height={1000}
         />
+
         <div className="inside margin_top_3">
           <h1 className={`max1200 ${primaryColor} unique`}>
             {basic[0].unique_element}

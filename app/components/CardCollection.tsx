@@ -3,7 +3,7 @@ import Card from "./Card";
 const CardCollection = () => {
   return (
     <div className="cards_full">
-      <Card
+      {/* <Card
         id="1"
         title={"PIETRACOLATA"}
         link="/pietracolata"
@@ -20,7 +20,7 @@ const CardCollection = () => {
         title={"SANSONE"}
         link="/sansone"
         img_src="https://storage.googleapis.com/lavastone/uvod/uvod_sansone.jpg"
-      />
+      /> */}
     </div>
   );
 };
