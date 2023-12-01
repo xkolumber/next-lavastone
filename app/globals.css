@@ -298,6 +298,7 @@ li{
 .placeholder_image{
     min-height: 100vh;
     width: 100%;
+    position: relative;
 }
 
 .introduction .logo{
@@ -538,6 +539,9 @@ li{
 }
 
 /*Custom styling*/
+.position_relative{
+    position: relative;
+}
 .display_none{
     display:none;
 }
@@ -1124,7 +1128,7 @@ a.download {
     display: flex;
     flex-direction: column;
 }
-.footer img{
+.footer_img{
     width: 142px;
     height: 64px;
 }
@@ -1166,7 +1170,7 @@ a.download {
     display: flex;
     height: 5rem;
 }
-.socials img{
+.socials_img{
     width: 2.9rem !important;
     cursor: pointer;
 }
@@ -1192,7 +1196,7 @@ a.download {
     .footer_copyright_cond{
         font-size: 1.8rem;
     }
-    .footer img{
+    .footer_img{
         width: 135px;
         height: 63px;
     }
@@ -1213,7 +1217,7 @@ a.download {
 .footer h3{
     font-size: 3rem;
 }
-footer img{
+.footer_img{
     width: 230px !important;
     height: 100px !important;
 }

@@ -5,7 +5,7 @@ import { create } from 'zustand';
 
 
 
-const initialFavoriteImages = JSON.parse(window.localStorage.getItem("favoriteImages") || "[]");
+const initialFavoriteImages = JSON.parse(localStorage.getItem("favoriteImages") || "[]");
 
 interface CounterStore {
   counter: number;

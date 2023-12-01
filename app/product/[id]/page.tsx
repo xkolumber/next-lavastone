@@ -6,14 +6,11 @@ import HeartIcon from "@/app/components/HeartIcon";
 import ProductSkeleton from "@/app/components/ProductSkeleton";
 import ToggleText from "@/app/components/ToggleText";
 import UniqueElement from "@/app/components/UniqueElement";
-import { products, basic } from "@/app/data/ProductsDataSk";
+import { basic, products } from "@/app/data/ProductsDataSk";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/router";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { ClipLoader } from "react-spinners";
 
 interface ProductData {
   id: number;
@@ -35,9 +32,7 @@ interface ProductData {
   last_four?: string[];
 }
 
-const page = ({ params }: { params: { id: string } }) => {
-  const pathname = usePathname();
-
+const Page = ({ params }: { params: { id: string } }) => {
   const [product, setProduct] = useState<ProductData | null>(null);
   const [loading, setLoading] = useState(true);
   const [customClassName, setCustomClassName] = useState("");
@@ -250,4 +245,4 @@ const page = ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default page;
+export default Page;

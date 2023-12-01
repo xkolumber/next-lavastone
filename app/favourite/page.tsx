@@ -10,7 +10,7 @@ import { ClipLoader } from "react-spinners";
 import { basic } from "../data/ProductsDataSk";
 import Link from "next/link";
 
-const page = () => {
+const Page = () => {
   const [favoriteImages, setFavoriteImages] = useState(
     JSON.parse(localStorage.getItem("favoriteImages") || "[]")
   );
@@ -225,4 +225,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

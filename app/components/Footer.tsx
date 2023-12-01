@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { basic } from "../data/ProductsDataSk";
+import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -10,10 +11,12 @@ const Footer = () => {
         <div className="inside margin_top_3">
           <div className="footer_first">
             <Link href="/">
-              <img
+              <Image
                 src="/biele_logo.svg"
                 alt="Biele logo"
                 className="footer_img"
+                width={200}
+                height={100}
               />
             </Link>
 
@@ -35,13 +38,31 @@ const Footer = () => {
               </div>
               <div className="socials">
                 <Link href="https://www.facebook.com/lavastone.sk">
-                  <img src="/facebook.svg" alt="Facebook icon" />
+                  <Image
+                    src="/facebook.svg"
+                    alt="Facebook icon"
+                    width={20}
+                    height={20}
+                    className="socials_img"
+                  />
                 </Link>
                 <Link href="https://www.instagram.com/lavastone_/">
-                  <img src="/instagram.svg" alt="Instagram icon" />
+                  <Image
+                    src="/instagram.svg"
+                    alt="Instagram icon"
+                    width={20}
+                    height={20}
+                    className="socials_img"
+                  />
                 </Link>
                 <Link href="https://www.linkedin.com">
-                  <img src="/linked_in.svg" alt="Linked in icon" />
+                  <Image
+                    src="/linked_in.svg"
+                    alt="Linked in icon"
+                    width={20}
+                    height={20}
+                    className="socials_img"
+                  />
                 </Link>
               </div>
             </div>

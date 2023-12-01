@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { basic } from "../data/ProductsDataSk";
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const Page = () => {
   const phoneRegExp = /^[+]?[0-9 ]+$/;
   const schema = yup.object({
     name: yup
@@ -199,4 +199,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -2,7 +2,7 @@ import React from "react";
 import { privacy } from "../data/ProductsDataSk";
 import Link from "next/link";
 
-const page = () => {
+const Page = () => {
   return (
     <div className="template">
       <div className="fixed_height" />
@@ -28,4 +28,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

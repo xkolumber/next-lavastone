@@ -5,8 +5,9 @@ import ToggleText from "../components/ToggleText";
 import ProductSkeleton from "../components/ProductSkeleton";
 import Link from "next/link";
 import ImageAbout from "../components/ImageAbout";
+import Image from "next/image";
 
-const page = () => {
+const Page = () => {
   if (!about_us) {
     return <div>Product not found</div>;
   }
@@ -27,10 +28,12 @@ const page = () => {
       </div>
       <ImageAbout />
       <div className="template cut_top">
-        <img
+        <Image
           src="https://storage.googleapis.com/lavastone/uvod/magnum_right.png"
           alt="Magma"
           className="magnum_right"
+          width={1000}
+          height={1000}
         />
         <div className="inside">
           <h1>{about_us[0].our_story_title}</h1>
@@ -78,4 +81,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

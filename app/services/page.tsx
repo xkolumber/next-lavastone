@@ -4,7 +4,7 @@ import Link from "next/link";
 import ToggleText from "../components/ToggleText";
 import UniqueElement from "../components/UniqueElement";
 
-const page = () => {
+const Page = () => {
   return (
     <>
       <div className="template">
@@ -38,4 +38,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
