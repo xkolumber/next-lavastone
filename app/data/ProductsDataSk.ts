@@ -112,7 +112,7 @@ export const products = [
     title_image: 'https://storage.googleapis.com/lavastone/fucina/main.jpg',
     title_description: "Ide o kolekciu od značky PIETRACOLATA venovanú gastronomickej scéne. Názov FUCINA je inšpirovaný miestom, kde Héfaistos, boh vulkánu, koval svoje artefakty.",
     second_title: 'Žiarivé farby',
-    second_title_description: 'Kolekcia FUCINA pretvára farby rebelského charakteru na rafinované a odvážne dizajny. Modrá farba nekonečného mora, oranžová voňavých citrusov, zelená bujarej prírody či červená farba živej magmy sa magicky stávajú dizajnovými doplnkami do každého interiéru. Starostlivo vyrobené predmety z kolekcie venovanej gastro interéru vytvárajú príjemné prostredie plné farieb života.',
+    second_title_description: 'Kolekcia FUCINA pretvára farby rebelského charakteru na rafinované a odvážne dizajny. Modrá farba nekonečného mora, oranžová voňavých citrusov, zelená bujarej prírody či červená farba živej lávy sa magicky stávajú dizajnovými doplnkami do každého interiéru. Starostlivo vyrobené predmety z kolekcie venovanej gastro interéru vytvárajú príjemné prostredie plné farieb života.',
     toggles: [
         {
           id: 1,

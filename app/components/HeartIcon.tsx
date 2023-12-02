@@ -16,20 +16,31 @@ const HeartIcon = ({ image_src, onUpdateFavorites }: Props) => {
     useCounterStore();
   const [isFilled, setIsFilled] = useState(favoriteImages.includes(image_src));
   const [isClicked, setIsClicked] = useState(isFilled);
+  const [productId, setProductId] = useState("");
 
-  const { productId } = useParams();
+  const pathname = usePathname();
+  useEffect(() => {
+    let productId: any = "";
+
+    if (pathname.includes("product")) {
+      productId = pathname.split("/").pop();
+    } else {
+      productId = "";
+    }
+    setProductId(productId);
+  }, [pathname]);
 
   useEffect(() => {
     if (productId === "1" || productId === "2" || productId === "3") {
       setIsFilled(favoriteImages.includes(image_src));
       setIsClicked(favoriteImages.includes(image_src));
     }
-  }, [favoriteImages, image_src]);
+  }, [favoriteImages, productId]);
 
   const notify = () =>
     toast.success("Pridané do obľúbených", {
       style: {
-        fontFamily: "Manrope",
+        fontFamily: "inherit",
         border: "1px solid #171717",
         padding: "16px",
         backgroundColor: productId === "2" ? "white" : "#cccccc",
