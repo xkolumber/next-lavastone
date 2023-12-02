@@ -102,6 +102,9 @@ li{
     .change_row_column{
         gap: 10rem;
     }
+    .max1200{
+        max-width: 80vw ;
+    }
 
 }
 
@@ -931,7 +934,6 @@ a.download {
     flex-direction: column;
     justify-content: space-between;
     border-top: 1px solid var(--tertiary-color);
-    padding: 1rem;
     background-color: var(--primary-color);
     width: 100%; /* Adjust width and border width */
     position: relative;
@@ -957,7 +959,9 @@ a.download {
     display: flex;
     justify-content: space-between;
     z-index: 2;
+    padding:1rem;
 }
+
 .card .arrow{
     rotate: -135deg;
 
@@ -967,6 +971,11 @@ a.download {
     height: 324px;
     object-fit: cover;
     margin-top: 0.6rem;
+   
+}
+.card_description{
+    margin-top: -2rem;
+    padding: 1rem;
 }
 .pointer {
     cursor: pointer;
@@ -984,7 +993,7 @@ a.download {
         justify-content: space-between;
         border: 1px solid var(--tertiary-color);
         height: 60rem;
-        padding: 2rem;
+      
         background-color: var(--primary-color);
         margin: 0 -1px;
         /* width: 33.33%; */
@@ -998,7 +1007,7 @@ a.download {
         opacity: 0;
         transition: opacity 0.3s ease-in;
         cursor: pointer;
-        height: 40rem;
+        height: 47rem;
         margin-top: 0rem;
       }
       .card:hover img {
@@ -1010,16 +1019,18 @@ a.download {
         flex-direction: row;
     }
     .card_description{
-        height: 140px;
+        height: 180px;
         z-index: 2;
-        margin-bottom: 7px;
         max-width: 200px;
+        padding: 2rem;
+    }
+    .space-between{
+        padding: 2rem;
     }
     
 }
 @media screen and (min-width:1024px){
     .card{
-        padding: 4rem;
         height: 70rem;
     }
     .card img{
@@ -1037,6 +1048,14 @@ a.download {
     .min800{
         width: 80rem;
     }
+    .space-between{
+        padding: 4rem;
+    }
+    .card_description{
+        height: 220px;
+        padding: 4rem;
+    }
+    
 }
 
 @media screen and (min-width:1600px){
@@ -1047,7 +1066,7 @@ a.download {
     height: 90rem;
 }
 .card img{
-    height: 70rem;
+    height: 74.5rem;
 }
 .min800{
     min-width: 160rem;
@@ -1469,8 +1488,9 @@ a.download {
       .togggle_layer{
         width:7rem;
     }
-    .togggle_arrow{
-        width: 5rem;
+    .card_togggle_arrow{
+        width:60px;
+        height: 60px;
     }
     .toggle_text_service{
         padding-bottom: 0rem !important;

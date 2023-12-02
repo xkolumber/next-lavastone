@@ -65,9 +65,9 @@ const HeartIcon = ({ image_src, onUpdateFavorites }: Props) => {
       <Toaster />
       <div className="heart_icon_img" onClick={toggleHeart}>
         {isFilled ? (
-          <img src="/heart_filled.svg" />
+          <img src="/heart_filled.svg" alt="Srdce" />
         ) : (
-          <img src="/heart_outline.svg" />
+          <img src="/heart_outline.svg" alt="Srdce" />
         )}
       </div>
     </>
